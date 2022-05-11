@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CoffeeAutonomous from '../Screens/CoffeeAutonomous';
-import Detail from '../Screens/Detail';
+//By default index file is been routes
+import { CoffeeAutonomous, Detail } from '../Screens'
 
 const Stack = createNativeStackNavigator();
 

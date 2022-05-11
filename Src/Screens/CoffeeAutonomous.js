@@ -55,7 +55,7 @@ const CoffeeAutonomous = ({navigation, route}) => {
             }}
           >
             
-              <TouchableOpacity  onPress={() => navigation.navigate('Detail', {data:item})}>
+              <TouchableOpacity  onPress={() => navigation.navigate('Detail', {data: item})}>
                 <Text style={{ color: 'white', fontSize: 20 }}>
                 Release Title : {item.Release_ReleaseTitle}
                   {"\n"}

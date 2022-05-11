@@ -16,9 +16,9 @@ import {
 
 export default App = ({ route }) => {
 
-console.log(route)
-console.log(route.params)
-  const { Release_Id } = route.params;
+// console.log(route)
+// console.log(route.params)
+//   const { Release_Id } = route.params;
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -27,9 +27,11 @@ console.log(route.params)
 
 
   //http://84.16.239.66/api/Release/GetReleasesDetails?ReleaseId=77763- example
+  //http://84.16.239.66/api/Release/GetReleasesDetails?ReleaseId=78305
+  //http://84.16.239.66/api/Release/GetAllReleases
 
   //Get Data
-  const getMovies = async () => {
+   const getMovies = async () => {
     try {
       const response = await fetch('http://84.16.239.66/api/Release/GetReleasesDetails?ReleaseId=78305');
       const json = await response.json();
