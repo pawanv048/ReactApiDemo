@@ -30,7 +30,7 @@ export default App = ({navigation, route}) => {
   //Get Data
   const getMovies = async () => {
     try {
-      const response = await fetch('http://84.16.239.66/api/Release/GetReleasesDetails');
+      const response = await fetch('http://84.16.239.66/api/Release/GetReleasesDetails?ReleaseId');
       const json = await response.json();
       setData(json.Data);  //set data
     } catch (error) {
@@ -154,10 +154,10 @@ export default App = ({navigation, route}) => {
 
               <View>
                 <View style={styles.trackContainer}>
-                  {/* <Text>Track Disc : {item.Tracks.Track_Disc} </Text>
+                  <Text>Track Disc : {item.Tracks.Track_Disc} </Text>
                   <Text>Track Title : {item.Tracks.Track_Title} </Text>
                   <Text>Track Artist : {item.Tracks.Track_Artist} </Text>
-                  <Text>Track MainGenre : {item.Tracks.Track_MainGenre} </Text> */}
+                  <Text>Track MainGenre : {item.Tracks.Track_MainGenre} </Text>
                 </View>
               </View>
             )}

@@ -50,7 +50,7 @@ const CoffeeAutonomous = ({navigation, route}) => {
               borderRadius: 15
             }}>
              
-              <TouchableOpacity  onPress={() => navigation.navigate('Detail', Release)}>
+              <TouchableOpacity  onPress={() => navigation.navigate('Detail', data)}>
                 <Text style={{ color: 'white', fontSize: 20 }}>
                 Release Title : {item.Release_ReleaseTitle}
                   {"\n"}
