@@ -11,8 +11,10 @@ import { format } from "date-fns";
 
 
 const CoffeeAutonomous = ({navigation, route}) => {
+//console.log(route)
+//console.log(navigation.params)
+//console.log(route.params.text)
 
- 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
@@ -21,7 +23,7 @@ const CoffeeAutonomous = ({navigation, route}) => {
       const response = await fetch('http://84.16.239.66/api/Release/GetAllReleases');
       const json = await response.json();
       setData(json.Data);  //set data 
-      console.log("show"+ response)
+      //console.log("show"+ JSON)
     } catch (error) {
       console.error(error);
     } finally {
@@ -31,13 +33,15 @@ const CoffeeAutonomous = ({navigation, route}) => {
 
   useEffect(() => {
     getMovies();
+   
   }, []);
 
 
-
+  
   return (
-
+    
     <SafeAreaView style={{ flex: 1, padding: 40 }}>
+      
       {isLoading ? <ActivityIndicator /> : (
         <FlatList
           data={data}
@@ -48,9 +52,10 @@ const CoffeeAutonomous = ({navigation, route}) => {
             <View style={{
               flex: 1, padding: 24, backgroundColor: 'black', marginBottom: 10,
               borderRadius: 15
-            }}>
-             
-              <TouchableOpacity  onPress={() => navigation.navigate('Detail', data)}>
+            }}
+          >
+            
+              <TouchableOpacity  onPress={() => navigation.navigate('Detail', {data:item})}>
                 <Text style={{ color: 'white', fontSize: 20 }}>
                 Release Title : {item.Release_ReleaseTitle}
                   {"\n"}

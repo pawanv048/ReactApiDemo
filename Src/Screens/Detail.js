@@ -14,25 +14,27 @@ import {
 } from 'react-native';
 
 
-export default App = ({navigation, route}) => {
+export default App = ({ route }) => {
 
-
+console.log(route)
+console.log(route.params)
   const { Release_Id } = route.params;
 
-   const [isLoading, setLoading] = useState(true);
-   const [data, setData] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState('');
 
 
-  //http://84.16.239.66/api/Release/GetReleasesDetails?ReleaseId=77763
+  //http://84.16.239.66/api/Release/GetReleasesDetails?ReleaseId=77763- example
 
   //Get Data
   const getMovies = async () => {
     try {
-      const response = await fetch('http://84.16.239.66/api/Release/GetReleasesDetails?ReleaseId');
+      const response = await fetch('http://84.16.239.66/api/Release/GetReleasesDetails?ReleaseId=78305');
       const json = await response.json();
       setData(json.Data);  //set data
+     // setData(json.Data.Release)
     } catch (error) {
       console.error(error);
     } finally {
@@ -48,7 +50,7 @@ export default App = ({navigation, route}) => {
     //const queryParams = new URLSearchParams(window.location.search);
     //const id = queryParams.get('Id');
     //alert(id)
-    getMovies();
+   getMovies();
     //getDataUsingPost();
   }, []);
 
@@ -75,7 +77,7 @@ export default App = ({navigation, route}) => {
         <View style={styles.releaseContainer}>
           <View >
             <Image
-              source={require("../../../assets/images/MusicTrack.jpeg")}
+              source={require("../../assets/images/MusicTrack.jpeg")}
               style={{ width: 150, height: 150, margin: 8, marginBottom: 3 }}
             />
             {/* User Feedback */}
@@ -128,13 +130,12 @@ export default App = ({navigation, route}) => {
           <FlatList
             style={{ paddingLeft: 10, marginVertical: 10 }}
             data={data}
-                  
+
             renderItem={({ item }) => (
               //console.log(item)
               //Release id :
               <View>
-                <Text style={{ fontSize: 18 }}> Release Id: {JSON.stringify(item.Release_Id)}</Text>
-                
+                <Text style={{ fontSize: 18 }}>Release Id: {item.Release.Release_Id}</Text>
                 {/* <Text style={{ fontSize: 18 }}>Release Release Title : {item.Release.Release_ReleaseTitle}</Text>
                 <Text style={{ fontSize: 18 }}>Release Label : {item.Release.Release_Label}</Text>
                 <Text style={{ fontSize: 18 }}>Release Artist : {item.Release.Release_PrimaryArtist}</Text> */}

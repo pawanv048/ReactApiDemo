@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CoffeeAutonomous from '../Screens/CoffeeAutonomous/CoffeeAutonomous';
-import Detail from '../Screens/Detail/Detail';
+import CoffeeAutonomous from '../Screens/CoffeeAutonomous';
+import Detail from '../Screens/Detail';
 
 const Stack = createNativeStackNavigator();
 
-function App() {
+function Routes() {
   return (
     <NavigationContainer >
       <Stack.Navigator initialRouteName="CoffeeAutonomous" >
@@ -17,4 +17,4 @@ function App() {
   );
 }
 
-export default App;
+export default Routes;
