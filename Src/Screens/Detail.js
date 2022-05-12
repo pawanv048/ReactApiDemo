@@ -31,12 +31,13 @@ export default App = ({ route }) => {
   //http://84.16.239.66/api/Release/GetAllReleases
 
   //Get Data
-   const getMovies = async () => {
+   const getRelease = async () => {
     try {
-      const response = await fetch('http://84.16.239.66/api/Release/GetReleasesDetails');
-      const json = await response.json();
-      setData(json.Data);  //set data
-     // setData(json.Data.Release)
+      const resp = await fetch(`http://84.16.239.66/api/Release/GetReleasesDetails?ReleaseId=${detailsData?.Release_Id}`)
+      console.log("detailsData"+ detailsData?.Release_Id)
+      const detailsData = route.params.data;
+      const json = await resp.json();
+      setData(json.Data);  
     } catch (error) {
       console.error(error);
     } finally {
