@@ -16,9 +16,9 @@ import {
 
 export default App = ({ route }) => {
 
-// console.log(route)
-// console.log(route.params)
-//   const { Release_Id } = route.params;
+ console.log(route)
+ console.log(route.params)
+ const { Release_Id } = route.params;
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -33,7 +33,7 @@ export default App = ({ route }) => {
   //Get Data
    const getMovies = async () => {
     try {
-      const response = await fetch('http://84.16.239.66/api/Release/GetReleasesDetails?ReleaseId=78305');
+      const response = await fetch('http://84.16.239.66/api/Release/GetReleasesDetails');
       const json = await response.json();
       setData(json.Data);  //set data
      // setData(json.Data.Release)
@@ -137,7 +137,7 @@ export default App = ({ route }) => {
               //console.log(item)
               //Release id :
               <View>
-                <Text style={{ fontSize: 18 }}>Release Id: {item.Release.Release_Id}</Text>
+                <Text style={{ fontSize: 18 }}>Release Id: {route.params.item.Release_Id}</Text>
                 {/* <Text style={{ fontSize: 18 }}>Release Release Title : {item.Release.Release_ReleaseTitle}</Text>
                 <Text style={{ fontSize: 18 }}>Release Label : {item.Release.Release_Label}</Text>
                 <Text style={{ fontSize: 18 }}>Release Artist : {item.Release.Release_PrimaryArtist}</Text> */}

@@ -1,6 +1,7 @@
 package com.demoapi;
-import android.os.Bundle;
+
 import com.facebook.react.ReactActivity;
+import android.os.Bundle;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 
