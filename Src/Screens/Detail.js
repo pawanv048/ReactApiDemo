@@ -61,16 +61,21 @@ export default App = ({navigation, route}) => {
 
   //Post data
 
-  const getDataUsingPost = () => {
+  const getDataUsingPost = (status, comment) => {
     //POST json
 
     var requestOptions = {
       method: 'POST',
+      body: {
+        release_id: detailsData?.Release_Id,
+        status: status,
+        comment: comment,
+      },
       redirect: 'follow',
     };
 
     fetch(
-      'http://84.16.239.66/api/ReleaseUpdate/PublishRelease?ReleaseId=77763&Status=true&Comment=',
+      'http://84.16.239.66/api/ReleaseUpdate/PublishRelease',
       requestOptions,
     )
       .then(response => response.text())
@@ -111,15 +116,18 @@ export default App = ({navigation, route}) => {
                     <View style={{alignItems: 'center', top: 300}}>
                       <View style={styles.modalView}>
                         <TextInput
+                          value={text}
                           style={styles.input}
                           placeholder="comment"
-                          onChangeText={text => setText(text)}
+                          onChange={t => setText(t)}
+                          // onChangeText={text => setText(text)}
                           //value={text}
                         />
                         <TouchableOpacity
                           style={{backgroundColor: 'blue', left: 80, top: 47}}
-                          //onPress={() => getDataUsingPost(text)}
-                          onPress={() => Alert.alert(text)}>
+                          onPress={() => getDataUsingPost(false, text)}
+                          // onPress={() => Alert.alert(text)}
+                        >
                           <Text style={{color: 'white', padding: 15}}>
                             Save
                           </Text>
@@ -140,7 +148,7 @@ export default App = ({navigation, route}) => {
 
                   <TouchableOpacity
                     style={styles.accept}
-                    onPress={getDataUsingPost}>
+                    onPress={() => getDataUsingPost(true, '')}>
                     <Text style={{color: 'white', fontSize: 16}}>Approve</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
