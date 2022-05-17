@@ -1,5 +1,5 @@
-import { PrivateValueStore } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
+import {PrivateValueStore} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -13,22 +13,18 @@ import {
   Alert,
 } from 'react-native';
 
-export default App = ({ route }) => {
-
+export default App = ({route}) => {
   const detailsData = route.params.data;
   //console.log(route.params.data)
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState(
-    'Release Id: ' + detailsData.Release_Id + '\n Status: true, \ncomment: '
-
+    'Release Id: ' + detailsData.Release_Id + '\n Status: true, \ncomment: ',
   );
-  const [txt, setTxt] = useState('Release Id: ' + detailsData.Release_Id)
+  const [txt, setTxt] = useState('Release Id: ' + detailsData.Release_Id);
 
-
-  const [headline, setHeadline] = useState('')
-
+  const [headline, setHeadline] = useState('');
 
   //Get Data
   const getRelease = async () => {
@@ -58,40 +54,48 @@ export default App = ({ route }) => {
   const postUser = (status, comment) => {
     const requestOptions = {
       method: 'POST',
-      headers: { 'ReleaseId': 'Release_Id', 'status': 'status', 'comment': `${comment}` },
+      headers: {
+        ReleaseId: detailsData?.Release_Id,
+        Status: status,
+        Comment: `${comment}`,
+      },
     };
 
-    fetch('http://84.16.239.66/api/ReleaseUpdate/PublishRelease', requestOptions)
-      .then((response) => response.json())
-      .then((json) => {
-        //console.log('Fetch API Response', json.data);
+    fetch(
+      'http://84.16.239.66/api/ReleaseUpdate/PublishRelease',
+      requestOptions,
+    )
+      .then(response => response.json())
+      .then(json => {
+        console.log('Fetch API Response', json);
         Alert.alert(
-          'Release Id: ' + detailsData.Release_Id +
-          '\n status : false' + '\n' +
-          headline,
-          [
-            { t: "ok", onPress: () => console.log("ok pressed") }
-          ]
-        )
+          'Release Id: ' +
+            detailsData.Release_Id +
+            '\n status : false' +
+            '\n' +
+            comment,
+          [{t: 'ok', onPress: () => console.log('ok pressed')}],
+        );
       })
-      .catch((error) => {
+      .catch(error => {
         console.error(error);
       });
+  };
+
+  {
+    /*Release header*/
   }
 
-  {/*Release header*/ }
-
   const ListHeader = () => {
-
     function showAlert() {
       Alert.alert(
-        'Release Id: ' + detailsData.Release_Id +
-        '\n status : false' + '\n' +
-        headline,
-        [
-          { t: "ok", onPress: () => console.log("ok pressed") }
-        ]
-      )
+        'Release Id: ' +
+          detailsData.Release_Id +
+          '\n status : false' +
+          '\n' +
+          headline,
+        [{t: 'ok', onPress: () => console.log('ok pressed')}],
+      );
     }
 
     //View to set in Header
@@ -109,75 +113,74 @@ export default App = ({ route }) => {
               }}
             />
             {/* User Feedback */}
-            <Modal
+            {/* <Modal
               animationType={'slide'}
               transparent={true}
               visible={showModal}
               //onRequestClose={() => showModal(false)}
             >
-              <View style={{ alignItems: 'center', top: 300 }}>
-
+              <View style={{alignItems: 'center', top: 300}}>
                 <View style={styles.modalView}>
-                  
-                    <TextInput
-                      style={styles.input}
-                      placeholder='Enter comment'
-                      onChangeText={t => setHeadline(t)}
-                    />
-                  
-                  <TouchableOpacity
-                    style={{ backgroundColor: 'blue', left: 80, top: 47 }}
+                  <TextInput
+                    value={headline}
+                    style={styles.input}
+                    placeholder="Enter comment"
+                    onChangeText={t => setHeadline(t)}
+                  />
 
-                    onPress={showAlert}
-                  //onPress={postUser}
-                  >
-                    <Text style={{ color: 'white', padding: 15 }}>
-                      Save
-                    </Text>
+                  <TouchableOpacity
+                    style={{backgroundColor: 'blue', left: 80, top: 47}}
+                    // onPress={showAlert}
+                    onPress={() => postUser(false, headline)}>
+                    <Text style={{color: 'white', padding: 15}}>Save</Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity
-                    style={{ backgroundColor: 'blue' }}
+                    style={{backgroundColor: 'blue'}}
                     onPress={() => {
-                      setShowModal(!showModal)
+                      setShowModal(!showModal);
                     }}>
-                    <Text style={{ color: 'white', padding: 15 }}>
-                      Dismiss
-                    </Text>
+                    <Text style={{color: 'white', padding: 15}}>Dismiss</Text>
                   </TouchableOpacity>
                 </View>
               </View>
-            </Modal>
+            </Modal> */}
+
+            <ModalFunction
+              showModal={showModal}
+              setShowModal={setShowModal}
+              headline={headline}
+              setHeadline={setHeadline}
+              onPress={(s, c) => postUser(s, c)}
+            />
 
             <TouchableOpacity
               style={styles.accept}
               // onPress={getDataUsingPost}
               //onPress={() => getDataUsingPost(true, '')}
-              onPress={() => Alert.alert(text)}
-            >
-              <Text style={{ color: 'white', fontSize: 16 }}>Approve</Text>
+              onPress={() => Alert.alert(text)}>
+              <Text style={{color: 'white', fontSize: 16}}>Approve</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.Reject}
-              onPress={() => setShowModal(!showModal)}
-            >
-              <Text style={{ color: 'white', fontSize: 19 }}>Reject</Text>
+              onPress={() => setShowModal(!showModal)}>
+              <Text style={{color: 'white', fontSize: 19}}>Reject</Text>
             </TouchableOpacity>
           </View>
 
           {/* Release Data */}
 
-          <View style={{ paddingLeft: 10, marginVertical: 10 }}>
-            <Text style={{ fontSize: 18 }}>
+          <View style={{paddingLeft: 10, marginVertical: 10}}>
+            <Text style={{fontSize: 18}}>
               Release Id: {route.params.data.Release_Id}
             </Text>
-            <Text style={{ fontSize: 18 }}>
+            <Text style={{fontSize: 18}}>
               Release_PrimaryArtist: {route.params.data.Release_PrimaryArtist}
             </Text>
-            <Text style={{ fontSize: 18 }}>
+            <Text style={{fontSize: 18}}>
               Release_Label: {route.params.data.Release_Label}
             </Text>
-            <Text style={{ fontSize: 18 }}>
+            <Text style={{fontSize: 18}}>
               Release_PrimaryArtist: {route.params.data.Release_PrimaryArtist}
             </Text>
           </View>
@@ -186,22 +189,21 @@ export default App = ({ route }) => {
     );
   };
 
-
   return (
     <React.Fragment>
       {isLoading ? (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <ActivityIndicator />
         </View>
       ) : (
         // Track Disk data
 
         <FlatList
-          contentContainerStyle={{ padding: 20 }}
+          contentContainerStyle={{padding: 20}}
           ListHeaderComponent={ListHeader}
-          ListFooterComponent={<View style={{ height: 20 }}></View>}
+          ListFooterComponent={<View style={{height: 20}}></View>}
           data={data}
-          renderItem={({ item }) => (
+          renderItem={({item}) => (
             <View>
               <View style={styles.trackContainer}>
                 <Text>Track Disc : {item.Tracks.Track_Disc} </Text>
@@ -259,11 +261,54 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 50,
-    width: "70%",
+    width: '70%',
     borderWidth: 1,
     textAlign: 'left',
     paddingLeft: 10,
     borderRadius: 5,
   },
-
 });
+
+const ModalFunction = ({
+  showModal,
+  setShowModal,
+  // headline,
+  // setHeadline,
+  onPress,
+}) => {
+  const [headline, setHeadline] = useState('');
+  return (
+    <Modal
+      animationType={'slide'}
+      transparent={true}
+      visible={showModal}
+      //onRequestClose={() => showModal(false)}
+    >
+      <View style={{alignItems: 'center', top: 300}}>
+        <View style={styles.modalView}>
+          <TextInput
+            value={headline}
+            style={styles.input}
+            placeholder="Enter comment"
+            onChangeText={t => setHeadline(t)}
+          />
+
+          <TouchableOpacity
+            style={{backgroundColor: 'blue', left: 80, top: 47}}
+            // onPress={showAlert}
+            onPress={() => onPress(false, headline)}>
+            <Text style={{color: 'white', padding: 15}}>Save</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={{backgroundColor: 'blue'}}
+            onPress={() => {
+              setShowModal(!showModal);
+            }}>
+            <Text style={{color: 'white', padding: 15}}>Dismiss</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </Modal>
+  );
+};
