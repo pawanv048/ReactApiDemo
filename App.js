@@ -1,12 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View,SafeAreaView } from 'react-native'
 import React from 'react'
-import Routes from './Src/Navigation/Routes'
+import Routes from './Src/Navigation/Routes';
+import Curd from './Src/Screens/curdOpertion';
+import InputScreen from './Src/Screens/inputScreen';
 
 const App = () => {
   return (
-    <View style={{ flex: 1}}>
+    <SafeAreaView style={{ flex: 1}}>
+      {/* <Curd/> */}
       <Routes/>
-    </View>
+      {/* <InputScreen/> */}
+    </SafeAreaView>
   )
 }
 

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { 
   ActivityIndicator,
@@ -78,4 +77,3 @@ const CoffeeAutonomous = ({navigation, route}) => {
 };
 
 export default CoffeeAutonomous;
-
