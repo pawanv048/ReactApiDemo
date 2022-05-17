@@ -10,9 +10,6 @@ import { format } from "date-fns";
 
 
 const CoffeeAutonomous = ({navigation, route}) => {
-//console.log(route)
-//console.log(navigation.params)
-//console.log(route.params.text)
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -22,7 +19,6 @@ const CoffeeAutonomous = ({navigation, route}) => {
       const response = await fetch('http://84.16.239.66/api/Release/GetAllReleases');
       const json = await response.json();
       setData(json.Data);  //set data 
-      //console.log("show"+ JSON)
     } catch (error) {
       console.error(error);
     } finally {

@@ -13,10 +13,8 @@ import {
   Alert,
 } from 'react-native';
 
-export default App = ({ navigation, route }) => {
-  console.log(route);
-  console.log('RouteDetailsData=', route.params.data);
-  // const {Release_Id} = route.params;
+export default App = ({ route }) => {
+
   const detailsData = route.params.data;
   //console.log(route.params.data)
   const [isLoading, setLoading] = useState(true);
@@ -31,10 +29,6 @@ export default App = ({ navigation, route }) => {
 
   const [headline, setHeadline] = useState('')
 
-
-  //http://84.16.239.66/api/Release/GetReleasesDetails?ReleaseId=77763- example
-  //http://84.16.239.66/api/Release/GetReleasesDetails?ReleaseId=78305
-  //http://84.16.239.66/api/Release/GetAllReleases
 
   //Get Data
   const getRelease = async () => {
@@ -65,11 +59,6 @@ export default App = ({ navigation, route }) => {
     const requestOptions = {
       method: 'POST',
       headers: { 'ReleaseId': 'Release_Id', 'status': 'status', 'comment': `${comment}` },
-      body: JSON.stringify({
-        ReleaseId: Release_Id,
-        status: status,
-        comment: comment
-      })
     };
 
     fetch('http://84.16.239.66/api/ReleaseUpdate/PublishRelease', requestOptions)
@@ -124,23 +113,23 @@ export default App = ({ navigation, route }) => {
               animationType={'slide'}
               transparent={true}
               visible={showModal}
+              //onRequestClose={() => showModal(false)}
             >
               <View style={{ alignItems: 'center', top: 300 }}>
 
                 <View style={styles.modalView}>
-                  <TextInput
-                    //value={tip}
-                    style={styles.input}
-                    placeholder="comment"
-                    value={headline}
-                    onChangeText={t => setHeadline(t)}
-                    //onChangeText={showAlert}
-                  />
-
+                  
+                    <TextInput
+                      style={styles.input}
+                      placeholder='Enter comment'
+                      onChangeText={t => setHeadline(t)}
+                    />
+                  
                   <TouchableOpacity
                     style={{ backgroundColor: 'blue', left: 80, top: 47 }}
 
                     onPress={showAlert}
+                  //onPress={postUser}
                   >
                     <Text style={{ color: 'white', padding: 15 }}>
                       Save
@@ -150,7 +139,7 @@ export default App = ({ navigation, route }) => {
                   <TouchableOpacity
                     style={{ backgroundColor: 'blue' }}
                     onPress={() => {
-                      setShowModal(!showModal);
+                      setShowModal(!showModal)
                     }}>
                     <Text style={{ color: 'white', padding: 15 }}>
                       Dismiss
@@ -171,7 +160,7 @@ export default App = ({ navigation, route }) => {
             <TouchableOpacity
               style={styles.Reject}
               onPress={() => setShowModal(!showModal)}
-              >
+            >
               <Text style={{ color: 'white', fontSize: 19 }}>Reject</Text>
             </TouchableOpacity>
           </View>
@@ -196,8 +185,6 @@ export default App = ({ navigation, route }) => {
       </React.Fragment>
     );
   };
-
-
 
 
   return (
@@ -272,12 +259,11 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 50,
-    width: "80%",
-    //margin: 12,
+    width: "70%",
     borderWidth: 1,
     textAlign: 'left',
     paddingLeft: 10,
     borderRadius: 5,
-    // textAlign: 'center'
   },
+
 });
