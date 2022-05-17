@@ -71,7 +71,7 @@ export default App = ({route}) => {
         Alert.alert(
           'Release Id: ' +
             detailsData.Release_Id +
-            '\n status : false' +
+            `\n status : ${status}` +
             '\n' +
             comment,
           [{t: 'ok', onPress: () => console.log('ok pressed')}],
