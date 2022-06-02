@@ -112,9 +112,6 @@ const deleteUser =  () => {
 
 
 
-
-
-
 export default class FetchAPIExample extends Component{
 
     render(){
@@ -156,13 +153,6 @@ export default class FetchAPIExample extends Component{
     
     
 }
-
-
-
-
-
-
-
 
 
 
