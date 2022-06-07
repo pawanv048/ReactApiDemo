@@ -95,7 +95,7 @@ const UpdateUser =  () => {
 }
 
 const deleteUser =  () => {
-    const requestOptions = {
+   const requestOptions = {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json','Accept': 'application/json', 'Authorization': 'Bearer d484c6e730cc22caf59cce6ee33c6ed1142a56f77dee4ac6b86ea8341492e408'},
     };
@@ -107,7 +107,7 @@ const deleteUser =  () => {
       });
     
 
-}
+} 
 
 
 

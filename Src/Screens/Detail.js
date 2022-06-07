@@ -1,4 +1,5 @@
 import { PrivateValueStore } from '@react-navigation/native';
+
 import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
@@ -23,8 +24,8 @@ export default App = ({ route }) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [text, setText] = useState(
-    'Release Id: ' + detailsData.Release_Id + '\n Status: true, \ncomment: ',
+  const [text, setText] = useState('\nStatus: true'
+    //'Release Id: ' + detailsData.Release_Id + '\n Status: true, \ncomment: ',
   );
   const [txt, setTxt] = useState('Release Id: ' + detailsData.Release_Id);
 
@@ -85,6 +86,22 @@ export default App = ({ route }) => {
         console.error(error);
       });
   };
+  //http://84.16.239.66/api/ReleaseUpdate/DeleteRelease
+
+  const deleteUser = () => {
+    const requestOptions = {
+      method: 'DELETE',
+      body: {
+        ReleaseId: detailsData?.Release_Id,
+      },
+    };
+
+    fetch('http://84.16.239.66/api/ReleaseUpdate/DeleteRelease', requestOptions)
+      .then(response => response.ok)
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   {
     /*Release header*/
@@ -130,7 +147,7 @@ export default App = ({ route }) => {
 
             <TouchableOpacity
               style={styles.accept}
-              onPress={() => Alert.alert(text)}
+              onPress={() => Alert.alert('Your release is approved and will send to DSP’s Soon', text)}
             //onPress={(s) => postUser(s)}
             >
               <Text style={{ color: 'white', fontSize: 16 }}>Approve</Text>
@@ -139,6 +156,12 @@ export default App = ({ route }) => {
               style={styles.Reject}
               onPress={() => setShowModal(!showModal)}>
               <Text style={{ color: 'white', fontSize: 18 }}>Reject</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.delete}
+              onPress={() => deleteUser()}
+            >
+              <Text style={{ color: 'white', fontSize: 18 }}>Delete</Text>
             </TouchableOpacity>
           </View>
 
@@ -181,8 +204,8 @@ export default App = ({ route }) => {
             renderItem={({ item }) => (
               <View>
                 <View style={styles.trackContainer}>
-                <Text>Track Artist : {item.Tracks.Track_Artist} </Text>
-                <Text>Track DisplayArtist: {item.Tracks.Track_DisplayArtist}</Text>
+                  <Text>Track Artist : {item.Tracks.Track_Artist} </Text>
+                  <Text>Track DisplayArtist: {item.Tracks.Track_DisplayArtist}</Text>
                   <Text>Track Title : {item.Tracks.Track_Title}</Text>
                   <Text>Track MixVersion: {item.Tracks.Track_MainGenre}</Text>
                   <Text>Track MainGenre : {item.Tracks.Track_MainGenre} </Text>
@@ -251,12 +274,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#D3DEDC',
     padding: 10,
     marginTop: 20,
-    
+
   },
   accept: {
     position: 'absolute',
     right: 30,
-    top: 20,
+    top: 10,
     backgroundColor: '#383838',
     padding: 15,
     borderRadius: 8,
@@ -264,12 +287,23 @@ const styles = StyleSheet.create({
   Reject: {
     position: 'absolute',
     right: 30,
-    top: 80,
+    top: 65,
     backgroundColor: '#383838',
     padding: 20,
     paddingTop: 15,
     paddingBottom: 15,
     borderRadius: 8
+  },
+  delete: {
+    position: 'absolute',
+    backgroundColor: "#383838",
+    top: 122,
+    right: 30,
+    padding: 20,
+    paddingBottom: 15,
+    paddingTop: 15,
+    borderRadius: 8,
+
   },
   modalView: {
     justifyContent: 'center',
