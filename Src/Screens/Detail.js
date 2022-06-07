@@ -1,6 +1,6 @@
-import { PrivateValueStore } from '@react-navigation/native';
+import {PrivateValueStore} from '@react-navigation/native';
 
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -12,19 +12,19 @@ import {
   Modal,
   TextInput,
   Alert,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from 'react-native';
 
-export default App = ({ route }) => {
-
+export default App = ({route}) => {
   const detailsData = route.params.data;
-  const IMAGE_PATH = `https://musicdistributionsystem.com/Release/${detailsData?.Release_Artwork}`
+  const IMAGE_PATH = `https://musicdistributionsystem.com/Release/${detailsData?.Release_Artwork}`;
   //console.log('show image',IMAGE_PATH)
   //console.log(route.params.data)
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [text, setText] = useState('\nStatus: true'
+  const [text, setText] = useState(
+    '\nStatus: true',
     //'Release Id: ' + detailsData.Release_Id + '\n Status: true, \ncomment: ',
   );
   const [txt, setTxt] = useState('Release Id: ' + detailsData.Release_Id);
@@ -75,11 +75,12 @@ export default App = ({ route }) => {
         console.log('Fetch API Response', json);
         Alert.alert(
           'Release Id: ' +
-          detailsData.Release_Id +
-          `\n status : ${status}` +
-          '\n' + 'comment : ' +
-          comment,
-          [{ t: 'ok', onPress: () => console.log('ok pressed') }],
+            detailsData.Release_Id +
+            `\n status : ${status}` +
+            '\n' +
+            'comment : ' +
+            comment,
+          [{t: 'ok', onPress: () => console.log('ok pressed')}],
         );
       })
       .catch(error => {
@@ -90,18 +91,24 @@ export default App = ({ route }) => {
 
   const deleteUser = () => {
     const requestOptions = {
-      method: 'DELETE',
+      method: 'POST',
       body: {
         ReleaseId: detailsData?.Release_Id,
       },
     };
 
-    fetch('http://84.16.239.66/api/ReleaseUpdate/DeleteRelease', requestOptions)
-      .then(response => response.ok)
-      .catch((error) => {
+    fetch(
+      `http://84.16.239.66/api/ReleaseUpdate/DeleteRelease?ReleaseId=${detailsData?.Release_Id}`,
+      requestOptions,
+    )
+      .then(response => {
+        console.log('DeleteResponse=', response.ok);
+        console.log('DeleteResponseData=', JSON.stringify(response));
+      })
+      .catch(error => {
         console.error(error);
       });
-  }
+  };
 
   {
     /*Release header*/
@@ -111,11 +118,11 @@ export default App = ({ route }) => {
     function showAlert() {
       Alert.alert(
         'Release Id: ' +
-        detailsData.Release_Id +
-        '\n status : false' +
-        '\n' +
-        headline,
-        [{ t: 'ok', onPress: () => console.log('ok pressed') }],
+          detailsData.Release_Id +
+          '\n status : false' +
+          '\n' +
+          headline,
+        [{t: 'ok', onPress: () => console.log('ok pressed')}],
       );
     }
 
@@ -125,7 +132,7 @@ export default App = ({ route }) => {
         <View style={styles.releaseContainer}>
           <View>
             <Image
-              source={{ uri: IMAGE_PATH }}
+              source={{uri: IMAGE_PATH}}
               style={{
                 width: 150,
                 height: 150,
@@ -137,7 +144,7 @@ export default App = ({ route }) => {
             {/* User Feedback */}
 
             <ModalFunction
-              animationType='slide'
+              animationType="slide"
               showModal={showModal}
               setShowModal={setShowModal}
               headline={headline}
@@ -147,37 +154,47 @@ export default App = ({ route }) => {
 
             <TouchableOpacity
               style={styles.accept}
-              onPress={() => Alert.alert('Your release is approved and will send to DSP’s Soon', text)}
-            //onPress={(s) => postUser(s)}
+              onPress={() =>
+                Alert.alert(
+                  'Your release is approved and will send to DSP’s Soon',
+                  text,
+                )
+              }
+              //onPress={(s) => postUser(s)}
             >
-              <Text style={{ color: 'white', fontSize: 16 }}>Approve</Text>
+              <Text style={{color: 'white', fontSize: 16}}>Approve</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.Reject}
               onPress={() => setShowModal(!showModal)}>
-              <Text style={{ color: 'white', fontSize: 18 }}>Reject</Text>
+              <Text style={{color: 'white', fontSize: 18}}>Reject</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.delete}
-              onPress={() => deleteUser()}
-            >
-              <Text style={{ color: 'white', fontSize: 18 }}>Delete</Text>
+              onPress={() => deleteUser()}>
+              <Text style={{color: 'white', fontSize: 18}}>Delete</Text>
             </TouchableOpacity>
           </View>
 
           {/* Release Data */}
 
-          <View style={{ paddingLeft: 10, paddingRight: 10, paddingBottom: 10, marginVertical: 10 }}>
-            <Text style={{ fontSize: 18 }}>
+          <View
+            style={{
+              paddingLeft: 10,
+              paddingRight: 10,
+              paddingBottom: 10,
+              marginVertical: 10,
+            }}>
+            <Text style={{fontSize: 18}}>
               Release Id: {route.params.data.Release_Id}
             </Text>
-            <Text style={{ fontSize: 18 }}>
+            <Text style={{fontSize: 18}}>
               Release_PrimaryArtist: {route.params.data.Release_PrimaryArtist}
             </Text>
-            <Text style={{ fontSize: 18 }}>
+            <Text style={{fontSize: 18}}>
               Release_Label: {route.params.data.Release_Label}
             </Text>
-            <Text style={{ fontSize: 18 }}>
+            <Text style={{fontSize: 18}}>
               Release_PrimaryArtist: {route.params.data.Release_PrimaryArtist}
             </Text>
           </View>
@@ -189,29 +206,33 @@ export default App = ({ route }) => {
   return (
     <React.Fragment>
       <KeyboardAvoidingView>
-
         {isLoading ? (
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <View
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <ActivityIndicator />
           </View>
         ) : (
           // Track Disk data
           <FlatList
-            contentContainerStyle={{ padding: 20 }}
+            contentContainerStyle={{padding: 20}}
             ListHeaderComponent={ListHeader}
-            ListFooterComponent={<View style={{ height: 20 }}></View>}
+            ListFooterComponent={<View style={{height: 20}}></View>}
             data={data}
-            renderItem={({ item }) => (
+            renderItem={({item}) => (
               <View>
                 <View style={styles.trackContainer}>
                   <Text>Track Artist : {item.Tracks.Track_Artist} </Text>
-                  <Text>Track DisplayArtist: {item.Tracks.Track_DisplayArtist}</Text>
+                  <Text>
+                    Track DisplayArtist: {item.Tracks.Track_DisplayArtist}
+                  </Text>
                   <Text>Track Title : {item.Tracks.Track_Title}</Text>
                   <Text>Track MixVersion: {item.Tracks.Track_MainGenre}</Text>
                   <Text>Track MainGenre : {item.Tracks.Track_MainGenre} </Text>
                   <Text>Track SubGenre : {item.Tracks.Track_SubGenre} </Text>
                   <Text>Track ISRC: {item.Tracks.Track_ISRC}</Text>
-                  <Text>Track FeaturedArtist: {item.Tracks.Track_FeaturedArtist}</Text>
+                  <Text>
+                    Track FeaturedArtist: {item.Tracks.Track_FeaturedArtist}
+                  </Text>
                 </View>
               </View>
             )}
@@ -222,21 +243,16 @@ export default App = ({ route }) => {
   );
 };
 
-
-const ModalFunction = ({
-  showModal,
-  setShowModal,
-  onPress,
-}) => {
+const ModalFunction = ({showModal, setShowModal, onPress}) => {
   const [headline, setHeadline] = useState('');
   return (
     <Modal
       animationType={'slide'}
       transparent={true}
       visible={showModal}
-    //onRequestClose={() => showModal(false)}
+      //onRequestClose={() => showModal(false)}
     >
-      <View style={{ alignItems: 'center', top: 300 }}>
+      <View style={{alignItems: 'center', top: 300}}>
         <View style={styles.modalView}>
           <TextInput
             //value={headline}
@@ -245,17 +261,30 @@ const ModalFunction = ({
             onChangeText={t => setHeadline(t)}
           />
           <TouchableOpacity
-            style={{ backgroundColor: '#371B58', left: 80, top: 47, borderRadius: 10 }}
+            style={{
+              backgroundColor: '#371B58',
+              left: 80,
+              top: 47,
+              borderRadius: 10,
+            }}
             onPress={() => onPress(false, headline)}>
-            <Text style={{ color: 'white', padding: 15, paddingLeft: 20, paddingRight: 20 }}>Save</Text>
+            <Text
+              style={{
+                color: 'white',
+                padding: 15,
+                paddingLeft: 20,
+                paddingRight: 20,
+              }}>
+              Save
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={{ backgroundColor: '#371B58', borderRadius: 10 }}
+            style={{backgroundColor: '#371B58', borderRadius: 10}}
             onPress={() => {
               setShowModal(!showModal);
             }}>
-            <Text style={{ color: 'white', padding: 15 }}>Dismiss</Text>
+            <Text style={{color: 'white', padding: 15}}>Dismiss</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -274,7 +303,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#D3DEDC',
     padding: 10,
     marginTop: 20,
-
   },
   accept: {
     position: 'absolute',
@@ -292,18 +320,17 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 15,
     paddingBottom: 15,
-    borderRadius: 8
+    borderRadius: 8,
   },
   delete: {
     position: 'absolute',
-    backgroundColor: "#383838",
+    backgroundColor: '#383838',
     top: 122,
     right: 30,
     padding: 20,
     paddingBottom: 15,
     paddingTop: 15,
     borderRadius: 8,
-
   },
   modalView: {
     justifyContent: 'center',
@@ -313,7 +340,7 @@ const styles = StyleSheet.create({
     height: '60%',
     borderColor: '#F5DF99',
     borderWidth: 2,
-    borderRadius: 20
+    borderRadius: 20,
   },
   input: {
     height: '30%',
