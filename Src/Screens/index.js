@@ -1,7 +1,15 @@
 import CoffeeAutonomous from '../Screens/CoffeeAutonomous';
 import Detail from '../Screens/Detail';
+import ReleaseScreen from './ReleaseScreen';
+import TrackScreen from './TrackScreen';
+import ShopScreen from './ShopScreen';
+import ExclusiveScreen from './ExclusiveScreen';
 
 export {
     CoffeeAutonomous,
-    Detail
+    Detail,
+    ReleaseScreen,
+    TrackScreen,
+    ShopScreen,
+    ExclusiveScreen
 }

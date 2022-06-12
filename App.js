@@ -1,20 +1,21 @@
-import { StyleSheet, Text, View,SafeAreaView } from 'react-native'
-import React from 'react'
+import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import React from 'react';
 import Routes from './Src/Navigation/Routes';
-
-
+import {DetailsDataProvider} from './Src/context/useDetailsData';
 
 const App = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1}}>
       {/* <Curd/> */}
-      <Routes/>
+      <DetailsDataProvider>
+        <Routes />
+      </DetailsDataProvider>
       {/* <InputScreen/> */}
       {/* <Registration/> */}
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

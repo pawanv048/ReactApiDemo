@@ -10,14 +10,17 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-navigation/material-top-tabs": "^6.2.1",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.2",
     "date-fns": "^2.28.0",
     "react": "17.0.2",
     "react-native": "0.68.0",
     "react-native-gesture-handler": "^2.4.1",
+    "react-native-pager-view": "^5.4.24",
     "react-native-safe-area-context": "^4.2.4",
     "react-native-screens": "^3.13.1",
+    "react-native-tab-view": "^3.1.1",
     "reactstrap": "^9.0.3",
     "webpack-dev-server": "^4.9.2"
   },
