@@ -3,7 +3,7 @@ const API = async ({url, params, method, headers, onSuccess, onError}) => {
     'Content-Type': 'multipart/form-data',
   };
 
-  console.log('url: ' + url);
+ // console.log('url: ' + url);
   await fetch(url, {
     method: method,
     headers: headers || defaultHeaders,
@@ -11,8 +11,8 @@ const API = async ({url, params, method, headers, onSuccess, onError}) => {
   })
     .then(response => response.json())
     .then(result => {
-      console.log(JSON.stringify(result));
-      console.log('abdcefgh');
+     // console.log(JSON.stringify(result));
+      //console.log('abdcefgh');
       onSuccess(result);
     })
     .catch(err => {
