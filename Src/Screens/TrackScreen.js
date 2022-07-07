@@ -11,8 +11,8 @@ const TrackScreen = () => {
       data={data}
       renderItem={({item}) => (
         <View style={{ margin: 15}}>
-          <Text>Track Disc: "{item?.Tracks?.Track_Disc}"</Text>
-          <Text>Track Track: "{item?.Tracks?.Track_Track}"</Text>
+          <Text>Track Disc: {item?.Tracks?.Track_Disc}</Text>
+          <Text>Track Track: {item?.Tracks?.Track_Track}</Text>
           <Text>Track Artist: "{item?.Tracks?.Track_Artist}"</Text>
           <Text>Track DisplayArtist: "{item?.Tracks?.Track_DisplayArtist}"</Text>
           {/* <Text>Track Title: "{data[0]?.Tracks?.Track_Title}"</Text> */}
