@@ -1,3 +1,5 @@
+import React, {useEffect, useState} from 'react';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {
   ActivityIndicator,
   Dimensions,
@@ -5,8 +7,6 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {
   ExclusiveScreen,
   ReleaseScreen,
@@ -14,9 +14,7 @@ import {
   TrackScreen,
 } from '../Screens';
 import useDetailsData from '../context/useDetailsData';
-
 const Tabs = createMaterialTopTabNavigator();
-
 const Detail = ({route}) => {
   const detailsData = route.params.data;
   const {data, setData} = useDetailsData();
