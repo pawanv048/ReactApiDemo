@@ -363,7 +363,7 @@ PODS:
     - Firebase/Messaging (= 9.2.0)
     - React-Core
     - RNFBApp
-  - RNGestureHandler (2.4.1):
+  - RNGestureHandler (2.5.0):
     - React-Core
   - RNScreens (3.13.1):
     - React-Core
@@ -559,7 +559,7 @@ SPEC CHECKSUMS:
   RNCPushNotificationIOS: 87b8d16d3ede4532745e05b03c42cff33a36cc45
   RNFBApp: e3e4af6906a891d46af60340b4313b63eb082de9
   RNFBMessaging: a6b4015aa22521335b2bb804106d2776cde8185b
-  RNGestureHandler: 4f4986408310a43f1606c391f38f76e0d6e790d5
+  RNGestureHandler: bad495418bcbd3ab47017a38d93d290ebd406f50
   RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
   Yoga: 7ab6e3ee4ce47d7b789d1cb520163833e515f452
 
