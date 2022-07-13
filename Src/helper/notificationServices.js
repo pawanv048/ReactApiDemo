@@ -33,3 +33,30 @@ let checkToken = await AsyncStorage.getItem('fcmToken')
         alert(error?.message)
     }
 }
+
+export const notificationListener = () => {
+  
+  messaging().onNotificationOpenedApp(remoteMessage => {
+    console.log(
+      'Notification caused app to open from background state:',
+      remoteMessage.notification,
+    );
+    console.log('background state', remoteMessage.notification)
+  });
+
+  // Check whether an initial notification is available
+  messaging()
+    .getInitialNotification()
+    .then(remoteMessage => {
+      if (remoteMessage) {
+        console.log(
+          'Notification caused app to open from quit state:',
+          remoteMessage.notification,
+        );
+        console.log('remote message', remoteMessage.notification)
+        //setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
+      }
+      // setLoading(false);
+    });
+
+}

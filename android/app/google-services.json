@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "398987979493",
+    "project_id": "jamvana-8abd3",
+    "storage_bucket": "jamvana-8abd3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398987979493:android:8734d42ce0ae8438a9020c",
+        "android_client_info": {
+          "package_name": "com.demoapi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398987979493-a3lvql2r22jp9q4n32btvp3sv4n0j3th.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDp7J5hj5odbuuQNiqVXpxQuH6pQLiu1B0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398987979493-a3lvql2r22jp9q4n32btvp3sv4n0j3th.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
